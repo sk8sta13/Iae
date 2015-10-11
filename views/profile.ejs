@@ -1,0 +1,32 @@
+<% include _header %>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="login-wrapper">
+			<div class="box">
+				<div class="content-wrap">
+					<h6>My Profile</h6>
+
+					<img src="/images/users/<%- user.picture %>" width="200" />
+
+					<form method="post" id="frmProfile" enctype="multipart/form-data">
+						<input type="text" name="name" id="name" value="<%- user.name %>" class="form-control" placeholder="Name" required>
+						<input type="text" name="phone" id="phone" value="<%- user.phone %>" class="form-control phone" placeholder="Phone">
+						<input type="file" name="picture" id="picture" class="form-control" placeholder="Picture">
+						<span class="error"></span>
+						<div class="action">
+							<button type="submit" class="btn btn-primary signup">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="already">
+				<a href="update-password/<%- user.email %>/<%- user._id %>">Update password</a> or 
+				<a href="/delete-account" id="delete">Delete my account</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include _footer %>

@@ -1,0 +1,49 @@
+<% include _header %>
+
+<div class="row">
+	<div class="col-md-3">
+		<div class="sidebar content-box" style="display: block;">
+			<ul class="nav">
+				<li class="current"><a href="#" id="newFriend"><i class="glyphicon glyphicon-plus"></i> New friend</a></li>
+				<% if (friends[0].friends.length != 0) { %>
+				<% friends.forEach(function(friend, i) { %>
+					<li>
+						<a href="/chat/<%- friend.friends[i].email %>" id="chat_<%- friend.friends[i].email.replace('@', '').replace(/\./g, '') %>">
+							<i class="glyphicon glyphicon-calendar"></i> <%- friend.friends[i].email %>
+						</a>
+					</li>
+				<% }); %>
+				<% } %>
+			</ul>
+		</div>
+	</div>
+
+	<div class="col-md-9">
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io.connect('http://localhost:3000');
+			socket.on('send-client', function(msg) {
+				$('#chat').html($('#chat').html() + msg);
+			});
+			var send = function() {
+				socket.emit('send-server', {msg: $('#msg').val()});
+				$('#msg').val('');
+			};
+		</script>
+		<div class="content-box-large">
+			<div class="row"><div class="col-md-12"><pre id="chat"></pre></div></div>
+			<div class="row">
+				<div class="col-md-11"><input type="text" id="msg" class="form-control" placeholder="Message..."></div>
+				<div class="col-md-1">
+					<div class="action">
+						<button class="btn btn-primary signup" onclick="send();"><i class="glyphicon glyphicon-send"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include _notifyScript %>
+
+<% include _footer %>

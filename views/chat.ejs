@@ -1,0 +1,27 @@
+<% include _header %>
+<div class="col-md-9">
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io.connect('http://localhost:3000');
+		socket.emit('join', '<%- sala %>');
+		socket.on('send-client', function(msg) {
+			$('#chat').html($('#chat').html() + msg);
+		});
+		var send = function() {
+			socket.emit('send-server', {msg: $('#msg').val()});
+			$('#msg').val('').focus();
+		};
+	</script>
+	<div class="content-box-large">
+		<div class="row"><div class="col-md-12"><pre id="chat"></pre></div></div>
+		<div class="row">
+			<div class="col-md-11"><input type="text" id="msg" class="form-control" placeholder="Message..."></div>
+			<div class="col-md-1">
+				<div class="action">
+					<button class="btn btn-primary signup" onclick="send();"><i class="glyphicon glyphicon-send"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% include _footer %>

@@ -1,0 +1,34 @@
+<% include _header %>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="login-wrapper">
+			<div class="box">
+				<div class="content-wrap">
+					<h6>Sign Up</h6>
+					<form method="post" id="frmSignup">
+						<input class="form-control" type="text" name="name" id="name" placeholder="Name" required>
+						<input class="form-control" type="email" name="email" id="email" placeholder="E-mail address" required>
+						<input class="form-control" type="password" name="password" id="password" placeholder="Password" required minlength="6">
+						<input class="form-control" type="password" name="cpassword" id="cpassword" placeholder="Confirm Password" required minlength="6" equalTo="#password">
+						<span class="error">
+							<% if (message) { %>
+								<label><%- message %></label>
+							<% } %>
+						</span>
+						<div class="action">
+							<button type="submit" class="btn btn-primary signup">Sign Up</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="already">
+				<p>Have an account already?</p>
+				<a href="/">Login</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include _footer %>

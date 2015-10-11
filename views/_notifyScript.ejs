@@ -1,0 +1,8 @@
+<script>
+	var socket = io.connect('http://localhost:3000');
+	socket.on('new-message', function(data) {
+		var id = '#chat_' + data.email.replace('@', '').replace(/\./g, '');
+		var href = $(id).attr('href');
+		$(id).attr('href', href + '?sala=' + data.sala);
+	});
+</script>
